@@ -9,10 +9,11 @@ import TaglineSection from "@/components/landing/TaglineSection";
 import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
 import ProductCatalogPage from "@/components/landing/ProductCatalogPage";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <Header />
       <main>
         <HeroSection />
@@ -24,6 +25,7 @@ const Index = () => {
         <HealthSection />
         <TaglineSection />
         <CTASection />
+        <WhatsAppButton />
       </main>
       <Footer />
     </div>
