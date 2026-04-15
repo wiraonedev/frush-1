@@ -1,5 +1,4 @@
-// import fruitsComposition from "@/assets/fruits-composition.png";
-import variant1 from "@/assets/images/strawberry-semangka-lemon.webp";
+import variant1 from "@/assets/images/real/4.webp";
 
 const FreshnessShowcase = () => {
 	return (

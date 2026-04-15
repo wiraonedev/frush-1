@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroBottle from "@/assets/images/lemon-melon.webp";
+import heroBottle from "@/assets/images/real/2.webp";
 
 const HeroSection = () => {
 	return (

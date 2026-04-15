@@ -1,4 +1,6 @@
-import productLineup from "@/assets/images/product-lineup.png";
+import product1 from "@/assets/images/real/1.webp";
+import product2 from "@/assets/images/real/2.webp";
+import product3 from "@/assets/images/real/3.webp";
 
 const products = [
 	{
@@ -36,12 +38,28 @@ const ProductsSection = () => {
 				</div>
 
 				{/* Product Image */}
-				<div className="flex justify-center mb-16">
-					<img
-						src={productLineup}
-						alt="Frush product lineup - three colorful fruit drink bottles"
-						className="w-full max-w-2xl fruit-shadow"
-					/>
+				<div className="flex flex-row">
+					<div className="flex justify-center mb-16">
+						<img
+							src={product1}
+							alt="Frush product lineup - three colorful fruit drink bottles"
+							className="w-full max-w-2xl fruit-shadow"
+						/>
+					</div>
+					<div className="flex justify-center mb-16">
+						<img
+							src={product2}
+							alt="Frush product lineup - three colorful fruit drink bottles"
+							className="w-full max-w-2xl fruit-shadow"
+						/>
+					</div>
+					<div className="flex justify-center mb-16">
+						<img
+							src={product3}
+							alt="Frush product lineup - three colorful fruit drink bottles"
+							className="w-full max-w-2xl fruit-shadow"
+						/>
+					</div>
 				</div>
 
 				{/* Product Cards */}
