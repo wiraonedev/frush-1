@@ -9,27 +9,28 @@ import TaglineSection from "@/components/landing/TaglineSection";
 import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
 import ProductCatalogPage from "@/components/landing/ProductCatalogPage";
-import WhatsAppButton from "@/components/ui/whatsapp-button";
+import CtaButton from "@/components/ui/cta-button";
+import ctaStyle from "@/lib/styles";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen relative">
-      <Header />
-      <main>
-        <HeroSection />
-        <ValuesSection />
-        <ProductsSection />
-        <FreshnessShowcase />
-        <ProductCatalogPage />
-        <LifestyleSection />
-        <HealthSection />
-        <TaglineSection />
-        <CTASection />
-        <WhatsAppButton />
-      </main>
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="min-h-screen relative">
+			<Header />
+			<main>
+				<HeroSection />
+				<ValuesSection />
+				<ProductsSection />
+				<FreshnessShowcase />
+				<ProductCatalogPage />
+				<LifestyleSection />
+				<HealthSection />
+				<TaglineSection />
+				<CTASection />
+				<CtaButton className={ctaStyle.whatsapp} />
+			</main>
+			<Footer />
+		</div>
+	);
 };
 
 export default Index;

@@ -4,22 +4,16 @@ import product3 from "@/assets/images/real/3.webp";
 
 const products = [
 	{
-		name: "Infused Fruit Drinks",
-		description: "Real fruit pieces infused in refreshing water",
-		flavors: ["Orange Citrus", "Berry Blast", "Tropical Mix"],
+		name: "Green Tea",
+		description: "Real Green Tea blended with natural fruit essences",
+		flavors: ["Strawberry Semangka Lemon"],
 		color: "bg-frush-yellow",
 	},
 	{
-		name: "Fruit Tea",
-		description: "Premium tea blended with natural fruit essences",
-		flavors: ["Peach Green Tea", "Lemon Black Tea", "Mango Oolong"],
+		name: "Coconut Water",
+		description: "Real Coconut Water blended with natural fruit essences",
+		flavors: ["Strawberry Semangka Lemon"],
 		color: "bg-frush-red",
-	},
-	{
-		name: "Chilled Fruit Drinks",
-		description: "Ice-cold refreshments with real fruit flavor",
-		flavors: ["Kiwi Lime", "Strawberry Mint", "Apple Ginger"],
-		color: "bg-frush-green",
 	},
 ];
 
@@ -63,7 +57,7 @@ const ProductsSection = () => {
 				</div>
 
 				{/* Product Cards */}
-				<div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+				<div className="grid md:grid-cols-2 gap-6 lg:gap-8">
 					{products.map((product, index) => (
 						<div
 							key={product.name}

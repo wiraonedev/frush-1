@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { products } from "@/lib/products";
+import CtaButton from "../ui/cta-button";
+import { buttonVariants } from "../ui/button";
 
 export default function ProductCatalogHero() {
 	const [activeIdx, setActiveIdx] = useState(0);
@@ -20,7 +22,7 @@ export default function ProductCatalogHero() {
 		return () => {
 			if (intervalRef.current) clearInterval(intervalRef.current);
 		};
-	}, [isAnimating]);
+	});
 
 	const active = products[activeIdx];
 
@@ -167,15 +169,27 @@ export default function ProductCatalogHero() {
 
 					{/* CTA */}
 					<div className="flex items-center gap-4">
-						<button
+						{/* <button
 							className="flex-1 max-w-[200px] py-4 rounded-2xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 active:translate-y-0"
+							style={{
+								backgroundColor: active.color,
+								transition: "background-color 0.6s ease",
+							}}
+						> */}
+						<CtaButton
+							message={`Halo Admin, saya ingin memesan ${active.name}. Mohon informasi pricelist dan ketersediaan produknya.`}
+							className={buttonVariants({
+								variant: "default",
+								size: "lg",
+							})}
 							style={{
 								backgroundColor: active.color,
 								transition: "background-color 0.6s ease",
 							}}
 						>
 							Add to Cart
-						</button>
+						</CtaButton>
+						{/* </button> */}
 						<div className="text-right">
 							<p className="text-3xl font-black">{active.price}</p>
 							<p className="text-xs text-black/40">per bottle</p>
@@ -202,7 +216,11 @@ export default function ProductCatalogHero() {
 						}}
 					>
 						{/* {active.emoji} */}
-						<img src={active.emoji} alt={active.name} className="w-[180px] h-[180px] lg:w-[220px] lg:h-[220px] object-contain drop-shadow-xl" />
+						<img
+							src={active.emoji}
+							alt={active.name}
+							className="w-[180px] h-[180px] lg:w-[220px] lg:h-[220px] object-contain drop-shadow-xl"
+						/>
 					</div>
 
 					{/* Dot indicators */}

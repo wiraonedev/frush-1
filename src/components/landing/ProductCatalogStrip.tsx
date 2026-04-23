@@ -90,7 +90,7 @@ export default function ProductCatalogStrip() {
 						<button
 							key={p.id}
 							onClick={() => setSelected(i)}
-							className="flex-shrink-0 flex flex-col items-center gap-3 p-4 rounded-2xl transition-all duration-300 border"
+							className="shrink-0 flex flex-col items-center gap-3 p-4 rounded-2xl transition-all duration-300 border"
 							style={{
 								minWidth: "120px",
 								backgroundColor:

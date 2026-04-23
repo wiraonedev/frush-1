@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import heroBottle from "@/assets/images/real/2.webp";
+import WhatsAppButton from "@/components/ui/cta-button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const HeroSection = () => {
 	return (
@@ -30,9 +31,14 @@ const HeroSection = () => {
 							<Button variant="hero" size="lg">
 								Explore Our Drinks
 							</Button>
-							<Button variant="heroOutline" size="lg">
+							<WhatsAppButton
+								className={buttonVariants({
+									variant: "heroOutline",
+									size: "lg",
+								})}
+							>
 								Order Now
-							</Button>
+							</WhatsAppButton>
 						</div>
 
 						{/* Stats */}

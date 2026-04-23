@@ -3,9 +3,9 @@ import { products } from "@/lib/products";
 
 const categories = [
 	"All",
-	"Infused Fruit Drinks",
-	"Fruit Tea",
-	"Chilled Fruit Drinks",
+	"Green Tea",
+	"Coconut Water",
+	// "Chilled Fruit Drinks",
 ];
 
 function useInView(threshold = 0.15) {
@@ -113,7 +113,11 @@ function ProductCard({
 							display: "flex",
 						}}
 					>
-						<img src={product.emoji} alt={product.name} className="w-24 h-24 object-contain" />
+						<img
+							src={product.emoji}
+							alt={product.name}
+							className="w-24 h-24 object-contain"
+						/>
 						{/* {product.emoji} */}
 					</span>
 				</div>
@@ -240,8 +244,8 @@ export default function ProductCatalogGrid() {
 						</span>
 					</h2>
 					<p className="text-lg text-black/50 max-w-xl mx-auto leading-relaxed">
-						Six carefully crafted drinks. Each one bursting with real fruit,
-						zero guilt, and all the freshness you deserve.
+						<b>FOR NOW,</b> Two carefully crafted drinks. Each one bursting with
+						real fruit, zero guilt, and all the freshness you deserve.
 					</p>
 				</div>
 

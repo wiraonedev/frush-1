@@ -16,7 +16,7 @@ export default function ProductCatalogPage() {
 			<ProductCatalogGrid />
 
 			{/* Section 3: Dark compare/explore section */}
-			<ProductCatalogStrip />
+			{/* <ProductCatalogStrip /> */}
 		</main>
 	);
 }
