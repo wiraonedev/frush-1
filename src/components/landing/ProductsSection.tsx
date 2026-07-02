@@ -1,59 +1,52 @@
-import product1 from "@/assets/images/real/1.webp";
-import product2 from "@/assets/images/real/2.webp";
-import product3 from "@/assets/images/real/3.webp";
-
-const products = [
-	{
-		name: "Green Tea",
-		description: "Real Green Tea blended with natural fruit essences",
-		flavors: ["Strawberry Semangka Lemon"],
-		color: "bg-frush-yellow",
-	},
-	{
-		name: "Coconut Water",
-		description: "Real Coconut Water blended with natural fruit essences",
-		flavors: ["Strawberry Semangka Lemon"],
-		color: "bg-frush-red",
-	},
-];
+import bottleGlass from "@/assets/images/new/botol_kaca.png";
+import bottlePlastic from "@/assets/images/new/botol_plastik.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProductsSection = () => {
+	const { t } = useLanguage();
+
+	const products = [
+		{
+			name: "FRUSH Botol Kaca",
+			descKey: "products.greenTeaDesc",
+			flavors: ["Strawberry", "Lemon", "Semangka"],
+			color: "bg-frush-red",
+			image: bottleGlass,
+		},
+		{
+			name: "FRUSH Botol Plastik",
+			descKey: "products.coconutWaterDesc",
+			flavors: ["Bulir Jeruk", "Strawberry", "Biji Selasih"],
+			color: "bg-frush-yellow",
+			image: bottlePlastic,
+		},
+	];
+
 	return (
 		<section id="products" className="py-20 lg:py-32 bg-background">
 			<div className="container mx-auto px-4 lg:px-8">
 				<div className="text-center mb-16">
 					<h2 className="text-3xl lg:text-5xl font-bold mb-4">
-						Our <span className="text-gradient">Refreshing</span> Choices
+						{t("products.title")}{" "}
+						<span className="text-gradient">{t("products.titleHighlight")}</span>{" "}
+						{t("products.titleEnd")}
 					</h2>
 					<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-						Discover our range of delicious fruit drinks, each crafted with care
-						and packed with natural goodness.
+						{t("products.subtitle")}
 					</p>
 				</div>
 
 				{/* Product Image */}
-				<div className="flex flex-row">
-					<div className="flex justify-center mb-16">
-						<img
-							src={product1}
-							alt="Frush product lineup - three colorful fruit drink bottles"
-							className="w-full max-w-2xl fruit-shadow"
-						/>
-					</div>
-					<div className="flex justify-center mb-16">
-						<img
-							src={product2}
-							alt="Frush product lineup - three colorful fruit drink bottles"
-							className="w-full max-w-2xl fruit-shadow"
-						/>
-					</div>
-					<div className="flex justify-center mb-16">
-						<img
-							src={product3}
-							alt="Frush product lineup - three colorful fruit drink bottles"
-							className="w-full max-w-2xl fruit-shadow"
-						/>
-					</div>
+				<div className="flex flex-row justify-center gap-8 mb-16">
+					{products.map((product) => (
+						<div key={product.name} className="flex justify-center">
+							<img
+								src={product.image}
+								alt={`${product.name} - botol minuman Frush`}
+								className="w-full max-w-xs fruit-shadow"
+							/>
+						</div>
+					))}
 				</div>
 
 				{/* Product Cards */}
@@ -72,12 +65,12 @@ const ProductsSection = () => {
 								{product.name}
 							</h3>
 							<p className="text-muted-foreground mb-6">
-								{product.description}
+								{t(product.descKey)}
 							</p>
 
 							<div className="space-y-2">
 								<p className="text-sm font-semibold text-foreground">
-									Popular Flavors:
+									{t("products.popularFlavors")}
 								</p>
 								<div className="flex flex-wrap gap-2">
 									{product.flavors.map((flavor) => (

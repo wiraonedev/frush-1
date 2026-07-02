@@ -1,12 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { products } from "@/lib/products";
-
-const categories = [
-	"All",
-	"Green Tea",
-	"Coconut Water",
-	// "Chilled Fruit Drinks",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function useInView(threshold = 0.15) {
 	const ref = useRef<HTMLDivElement | null>(null);
@@ -34,12 +28,13 @@ function ProductCard({
 }) {
 	const { ref, inView } = useInView();
 	const [hovered, setHovered] = useState(false);
-	const [added, setAdded] = useState(false);
+	const { t } = useLanguage();
 
-	const handleAdd = () => {
-		setAdded(true);
-		setTimeout(() => setAdded(false), 1800);
-	};
+	const phoneNumber = "6288987135615";
+	const waMessage = encodeURIComponent(
+		`Halo Admin, saya ingin memesan *${product.name}* (${product.volume}). Mohon informasi ketersediaan dan cara pemesanannya. Terima kasih!`
+	);
+	const waLink = `https://wa.me/${phoneNumber}?text=${waMessage}`;
 
 	return (
 		<div
@@ -80,14 +75,12 @@ function ProductCard({
 					className="relative flex items-center justify-center pt-10 pb-4"
 					style={{ minHeight: "200px" }}
 				>
-					{/* Radial glow */}
 					<div
 						className="absolute inset-0 opacity-20"
 						style={{
 							background: `radial-gradient(circle at 50% 60%, ${product.color} 0%, transparent 70%)`,
 						}}
 					/>
-					{/* Decorative ring */}
 					<div
 						className="absolute w-32 h-32 rounded-full border-2 opacity-20 transition-all duration-500"
 						style={{
@@ -103,7 +96,7 @@ function ProductCard({
 						}}
 					/>
 					<span
-						className="relative z-10 text-8xl leading-none select-none flex justify-center items-center h-24 w-full"
+						className="relative z-10 leading-none select-none flex justify-center items-center h-24 w-full"
 						style={{
 							filter: "drop-shadow(0 16px 24px rgba(0,0,0,0.15))",
 							transform: hovered
@@ -118,21 +111,17 @@ function ProductCard({
 							alt={product.name}
 							className="w-24 h-24 object-contain"
 						/>
-						{/* {product.emoji} */}
 					</span>
 				</div>
 
 				{/* Info */}
 				<div className="px-5 pb-5">
-					{/* Category */}
 					<p
 						className="text-xs font-bold uppercase tracking-widest mb-1"
 						style={{ color: product.color }}
 					>
 						{product.category}
 					</p>
-
-					{/* Name */}
 					<h3
 						className="text-2xl font-black mb-1 tracking-tight"
 						style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
@@ -143,7 +132,6 @@ function ProductCard({
 						"{product.tagline}"
 					</p>
 
-					{/* Ingredients */}
 					<div className="flex flex-wrap gap-1 mb-4">
 						{product.ingredients.map((ing) => (
 							<span
@@ -159,15 +147,15 @@ function ProductCard({
 					<div className="flex gap-4 mb-5 text-center">
 						<div className="flex-1 bg-white/50 rounded-xl py-2">
 							<p className="text-sm font-black">{product.cal}</p>
-							<p className="text-[10px] text-black/40 font-medium">Calories</p>
+							<p className="text-[10px] text-black/40 font-medium">{t("catalog.calories")}</p>
 						</div>
 						<div className="flex-1 bg-white/50 rounded-xl py-2">
 							<p className="text-sm font-black">{product.sugar}</p>
-							<p className="text-[10px] text-black/40 font-medium">Sugar</p>
+							<p className="text-[10px] text-black/40 font-medium">{t("catalog.sugar")}</p>
 						</div>
 						<div className="flex-1 bg-white/50 rounded-xl py-2">
-							<p className="text-sm font-black">350ml</p>
-							<p className="text-[10px] text-black/40 font-medium">Volume</p>
+							<p className="text-sm font-black">{product.volume}</p>
+							<p className="text-[10px] text-black/40 font-medium">{t("catalog.volume")}</p>
 						</div>
 					</div>
 
@@ -175,18 +163,20 @@ function ProductCard({
 					<div className="flex items-center justify-between">
 						<div>
 							<p className="text-xl font-black">{product.price}</p>
-							<p className="text-[10px] text-black/40">per bottle</p>
+							<p className="text-[10px] text-black/40">{t("catalog.perBottle")}</p>
 						</div>
-						<button
-							onClick={handleAdd}
-							className="px-4 py-2.5 rounded-xl text-white text-sm font-bold transition-all hover:scale-105 active:scale-95 min-w-[110px]"
+						<a
+							href={waLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="px-4 py-2.5 rounded-xl text-white text-sm font-bold transition-all hover:scale-105 active:scale-95 min-w-[110px] text-center"
 							style={{
-								backgroundColor: added ? "#4CAF50" : product.color,
-								transition: "background-color 0.3s ease, transform 0.15s ease",
+								backgroundColor: product.color,
+								transition: "transform 0.15s ease",
 							}}
 						>
-							{added ? "✓ Added!" : "Add to Cart"}
-						</button>
+							💬 {t("catalog.orderWA")}
+						</a>
 					</div>
 				</div>
 			</div>
@@ -194,14 +184,27 @@ function ProductCard({
 	);
 }
 
+// Category filter is always in English internally; displayed labels come from translations
+const CATEGORY_ALL = "All";
+
 export default function ProductCatalogGrid() {
-	const [activeCategory, setActiveCategory] = useState("All");
+	const [activeCategory, setActiveCategory] = useState(CATEGORY_ALL);
 	const { ref: headerRef, inView: headerInView } = useInView(0.1);
+	const { t, language } = useLanguage();
+
+	const categories = [CATEGORY_ALL, "Coconut Water"];
+
+	const getCategoryLabel = (cat: string) => {
+		if (cat === CATEGORY_ALL) return language === "id" ? "Semua" : "All";
+		return cat;
+	};
 
 	const filtered =
-		activeCategory === "All"
+		activeCategory === CATEGORY_ALL
 			? products
 			: products.filter((p) => p.category === activeCategory);
+
+	const isId = language === "id";
 
 	return (
 		<section className="py-24 bg-white relative overflow-hidden">
@@ -226,13 +229,13 @@ export default function ProductCatalogGrid() {
 					}}
 				>
 					<p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4CAF50] mb-4">
-						Our Collection
+						{isId ? "Koleksi Kami" : "Our Collection"}
 					</p>
 					<h2
-						className="text-5xl lg:text-7xl font-black tracking-tight mb-6"
+						className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight mb-6"
 						style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
 					>
-						Pick Your{" "}
+						{isId ? "Pilih " : "Pick Your "}
 						<span
 							style={{
 								background: "linear-gradient(135deg, #F5A623, #4CAF50)",
@@ -244,8 +247,11 @@ export default function ProductCatalogGrid() {
 						</span>
 					</h2>
 					<p className="text-lg text-black/50 max-w-xl mx-auto leading-relaxed">
-						<b>FOR NOW,</b> Two carefully crafted drinks. Each one bursting with
-						real fruit, zero guilt, and all the freshness you deserve.
+						{isId ? (
+							<><b>UNTUK SAAT INI,</b> Dua minuman yang dibuat dengan cermat. Masing-masing penuh buah asli, tanpa rasa bersalah, dan semua kesegaran yang Anda butuhkan.</>
+						) : (
+							<><b>FOR NOW,</b> Two carefully crafted drinks. Each one bursting with real fruit, zero guilt, and all the freshness you deserve.</>
+						)}
 					</p>
 				</div>
 
@@ -275,7 +281,7 @@ export default function ProductCatalogGrid() {
 										}
 							}
 						>
-							{cat}
+							{getCategoryLabel(cat)}
 						</button>
 					))}
 				</div>
@@ -286,44 +292,6 @@ export default function ProductCatalogGrid() {
 						<ProductCard key={product.id} product={product} index={i} />
 					))}
 				</div>
-
-				{/* Bottom CTA */}
-				{/* <div
-          className="text-center mt-20 py-16 rounded-3xl relative overflow-hidden"
-          style={{
-            background: "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)",
-          }}
-        >
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              background: "radial-gradient(circle at 30% 50%, #F5A623, transparent 60%), radial-gradient(circle at 70% 50%, #4CAF50, transparent 60%)",
-            }}
-          />
-          <div className="relative z-10">
-            <p className="text-white/60 text-sm font-semibold uppercase tracking-widest mb-3">
-              Can't decide?
-            </p>
-            <h3
-              className="text-4xl lg:text-5xl font-black text-white mb-4"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              Try the Frush Bundle
-            </h3>
-            <p className="text-white/50 mb-8 max-w-md mx-auto">
-              Get all 6 flavors delivered fresh to your door. Save 20% on your first bundle order.
-            </p>
-            <button
-              className="px-10 py-4 rounded-2xl font-bold text-black text-lg hover:scale-105 active:scale-95 transition-all"
-              style={{
-                background: "linear-gradient(135deg, #F5A623, #F7C948)",
-                boxShadow: "0 8px 30px rgba(245,166,35,0.4)",
-              }}
-            >
-              Shop the Bundle — Save 20%
-            </button>
-          </div>
-        </div> */}
 			</div>
 		</section>
 	);

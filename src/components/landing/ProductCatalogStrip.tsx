@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { products } from "@/lib/products";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function useInView(threshold = 0.15) {
 	const ref = useRef<HTMLDivElement | null>(null);
@@ -18,25 +19,31 @@ function useInView(threshold = 0.15) {
 	return { ref, inView };
 }
 
-const features = [
-	{ label: "Real Fruit", icon: "🍓", value: "100%", desc: "No concentrates" },
-	{ label: "Daily Fresh", icon: "⚡", value: "24hr", desc: "Production cycle" },
-	{
-		label: "No Additives",
-		icon: "🌿",
-		value: "Zero",
-		desc: "Artificial anything",
-	},
-	{ label: "Low Sugar", icon: "💚", value: "<10g", desc: "Per serving" },
-];
-
 export default function ProductCatalogStrip() {
 	const [selected, setSelected] = useState(0);
 	const { ref: headerRef, inView: headerInView } = useInView(0.1);
 	const { ref: stripRef, inView: stripInView } = useInView(0.1);
 	const { ref: featRef, inView: featInView } = useInView(0.1);
+	const { t } = useLanguage();
 
 	const active = products[selected];
+
+	const features = [
+		{ labelKey: "catalog.realFruit", icon: "🍓", value: "100%", descKey: "catalog.noConcentrates" },
+		{ labelKey: "catalog.dailyFresh", icon: "⚡", value: "24hr", descKey: "catalog.productionCycle" },
+		{
+			labelKey: "catalog.noAdditives",
+			icon: "🌿",
+			value: "Zero",
+			descKey: "catalog.artificialAnything",
+		},
+		{ labelKey: "catalog.lowSugar", icon: "💚", value: "<10g", descKey: "catalog.perServing" },
+	];
+
+	const getIngredientRole = (i: number) => {
+		const roles = [t("product.primary"), t("product.secondary"), t("product.accent")];
+		return roles[i] || t("product.boost");
+	};
 
 	return (
 		<section className="bg-[#0e0e0e] py-24 overflow-hidden relative">
@@ -61,17 +68,18 @@ export default function ProductCatalogStrip() {
 					}}
 				>
 					<p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4CAF50] mb-4">
-						Compare & Explore
+						{t("catalog.compareExplore")}
 					</p>
 					<h2
-						className="text-5xl lg:text-6xl font-black tracking-tight text-white mb-4"
+						className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4"
 						style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
 					>
-						Find Your <span style={{ color: "#F5A623" }}>Perfect</span> Match
+						{t("catalog.findPerfect")}{" "}
+						<span style={{ color: "#F5A623" }}>{t("catalog.perfect")}</span>{" "}
+						{t("catalog.match")}
 					</h2>
-					<p className="text-white/40 max-w-lg mx-auto">
-						Tap any drink below to explore its flavor profile, ingredients, and
-						why it's made for you.
+					<p className="text-white/40 max-w-lg mx-auto text-sm sm:text-base">
+						{t("catalog.subtitle")}
 					</p>
 				</div>
 
@@ -133,7 +141,7 @@ export default function ProductCatalogStrip() {
 						style={{
 							background: `radial-gradient(circle at 50% 50%, ${active.color}33, ${active.color}08)`,
 							border: `1px solid ${active.color}22`,
-							minHeight: "360px",
+							minHeight: "280px",
 						}}
 					>
 						{/* Decorative rings */}
@@ -151,7 +159,7 @@ export default function ProductCatalogStrip() {
 						))}
 						<div className="relative z-10 text-center">
 							<span
-								className="text-[140px] leading-none block"
+								className="text-[100px] sm:text-[140px] leading-none block"
 								style={{
 									filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.4))",
 									animation: "floatEmoji 3s ease-in-out infinite",
@@ -178,7 +186,7 @@ export default function ProductCatalogStrip() {
 							{active.category}
 						</p>
 						<h3
-							className="text-5xl font-black text-white mb-2 tracking-tight"
+							className="text-4xl sm:text-5xl font-black text-white mb-2 tracking-tight"
 							style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
 						>
 							{active.name}
@@ -203,14 +211,14 @@ export default function ProductCatalogStrip() {
 						{/* Ingredient bars */}
 						<div className="mb-6">
 							<p className="text-white/40 text-xs font-bold uppercase tracking-widest mb-3">
-								Key Ingredients
+								{t("catalog.keyIngredients")}
 							</p>
 							{active.ingredients.map((ing, i) => (
 								<div key={ing} className="mb-2">
 									<div className="flex justify-between text-sm mb-1">
 										<span className="text-white/70 font-medium">{ing}</span>
 										<span style={{ color: active.color }} className="font-bold">
-											{["Primary", "Secondary", "Accent"][i] || "Boost"}
+											{getIngredientRole(i)}
 										</span>
 									</div>
 									<div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -230,18 +238,18 @@ export default function ProductCatalogStrip() {
 						{/* Nutrition */}
 						<div className="grid grid-cols-3 gap-3 mb-8">
 							{[
-								{ label: "Calories", value: active.cal },
-								{ label: "Sugar", value: active.sugar },
-								{ label: "Volume", value: "350ml" },
-							].map(({ label, value }) => (
+								{ labelKey: "catalog.calories", value: active.cal },
+								{ labelKey: "catalog.sugar", value: active.sugar },
+								{ labelKey: "catalog.volume", value: active.volume },
+							].map(({ labelKey, value }) => (
 								<div
-									key={label}
+									key={labelKey}
 									className="text-center py-4 rounded-2xl"
 									style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
 								>
 									<p className="text-xl font-black text-white">{value}</p>
 									<p className="text-xs text-white/40 font-medium mt-0.5">
-										{label}
+										{t(labelKey)}
 									</p>
 								</div>
 							))}
@@ -251,17 +259,20 @@ export default function ProductCatalogStrip() {
 						<div className="flex items-center gap-4">
 							<div>
 								<p className="text-3xl font-black text-white">{active.price}</p>
-								<p className="text-xs text-white/30">per bottle</p>
+								<p className="text-xs text-white/30">{t("catalog.perBottle")}</p>
 							</div>
-							<button
-								className="flex-1 py-4 rounded-2xl font-bold text-black text-lg transition-all hover:scale-105 active:scale-95 hover:shadow-2xl"
+							<a
+								href={`https://wa.me/6288987135615?text=${encodeURIComponent(`Halo Admin, saya ingin memesan *${active.name}* (${active.volume}). Mohon informasi ketersediaan dan cara pemesanannya. Terima kasih!`)}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex-1 py-4 rounded-2xl font-bold text-black text-lg transition-all hover:scale-105 active:scale-95 hover:shadow-2xl text-center"
 								style={{
 									background: `linear-gradient(135deg, ${active.color}, ${active.color}bb)`,
 									boxShadow: `0 8px 30px ${active.color}44`,
 								}}
 							>
-								Order {active.name}
-							</button>
+								💬 {t("catalog.orderWA")} {active.name}
+							</a>
 						</div>
 					</div>
 				</div>
@@ -270,8 +281,8 @@ export default function ProductCatalogStrip() {
 				<div ref={featRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
 					{features.map((f, i) => (
 						<div
-							key={f.label}
-							className="rounded-2xl p-6 text-center border border-white/8"
+							key={f.labelKey}
+							className="rounded-2xl p-4 sm:p-6 text-center border border-white/8"
 							style={{
 								backgroundColor: "rgba(255,255,255,0.03)",
 								opacity: featInView ? 1 : 0,
@@ -281,8 +292,8 @@ export default function ProductCatalogStrip() {
 						>
 							<span className="text-3xl mb-3 block">{f.icon}</span>
 							<p className="text-2xl font-black text-white mb-1">{f.value}</p>
-							<p className="text-sm font-bold text-white/60">{f.label}</p>
-							<p className="text-xs text-white/30 mt-1">{f.desc}</p>
+							<p className="text-sm font-bold text-white/60">{t(f.labelKey)}</p>
+							<p className="text-xs text-white/30 mt-1">{t(f.descKey)}</p>
 						</div>
 					))}
 				</div>
