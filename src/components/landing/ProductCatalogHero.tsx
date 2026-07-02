@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { products } from "@/lib/products";
 import CtaButton from "../ui/cta-button";
 import { buttonVariants } from "../ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProductCatalogHero() {
 	const [activeIdx, setActiveIdx] = useState(0);
 	const [isAnimating, setIsAnimating] = useState(false);
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+	const { t } = useLanguage();
 
 	const rotate = (dir: 1 | -1) => {
 		if (isAnimating) return;
@@ -25,6 +27,18 @@ export default function ProductCatalogHero() {
 	});
 
 	const active = products[activeIdx];
+
+	// Tagline translation helper
+	const getTagline = (id: number) => {
+		if (id === 1) return t("product.greenTeaTagline");
+		if (id === 2) return t("product.coconutWaterTagline");
+		return active.tagline;
+	};
+
+	const getIngredientRole = (i: number) => {
+		const roles = [t("product.primary"), t("product.secondary"), t("product.accent")];
+		return roles[i] || t("product.boost");
+	};
 
 	return (
 		<section
@@ -52,32 +66,10 @@ export default function ProductCatalogHero() {
 				style={{ backgroundColor: active.color }}
 			/>
 
-			{/* Nav bar */}
-			{/* <nav className="relative z-20 flex items-center justify-between px-8 lg:px-16 py-6">
-        <div className="flex items-center gap-2">
-          <span className="font-black text-2xl tracking-tight" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-            Frush
-          </span>
-          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-black/8 text-black/60">Catalog</span>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black/60">
-          <a href="#" className="hover:text-black transition-colors">All Drinks</a>
-          <a href="#" className="hover:text-black transition-colors">Infused</a>
-          <a href="#" className="hover:text-black transition-colors">Fruit Tea</a>
-          <a href="#" className="hover:text-black transition-colors">Chilled</a>
-        </div>
-        <button
-          className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-all hover:scale-105 active:scale-95"
-          style={{ backgroundColor: active.color, transition: "background-color 0.6s ease" }}
-        >
-          Order Now
-        </button>
-      </nav> */}
-
 			{/* Hero content */}
-			<div className="relative z-20 flex-1 flex flex-col lg:flex-row items-center justify-center gap-12 px-8 lg:px-16 pb-12">
+			<div className="relative z-20 flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-6 sm:px-8 lg:px-16 pt-8 pb-12">
 				{/* Left: Product info */}
-				<div className="flex-1 max-w-lg">
+				<div className="flex-1 max-w-lg w-full">
 					{/* Category pill */}
 					<div
 						className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6"
@@ -96,7 +88,7 @@ export default function ProductCatalogHero() {
 
 					{/* Name */}
 					<h1
-						className="text-6xl lg:text-8xl font-black leading-[0.9] mb-4 tracking-tight"
+						className="text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.9] mb-4 tracking-tight"
 						style={{
 							fontFamily: "'Playfair Display', Georgia, serif",
 							opacity: isAnimating ? 0 : 1,
@@ -107,14 +99,14 @@ export default function ProductCatalogHero() {
 						{active.name}
 					</h1>
 					<p
-						className="text-xl text-black/50 mb-8 italic"
+						className="text-lg sm:text-xl text-black/50 mb-8 italic"
 						style={{
 							fontFamily: "'Playfair Display', Georgia, serif",
 							opacity: isAnimating ? 0 : 1,
 							transition: "opacity 0.3s ease 0.05s",
 						}}
 					>
-						"{active.tagline}"
+						"{getTagline(active.id)}"
 					</p>
 
 					{/* Badges */}
@@ -135,9 +127,9 @@ export default function ProductCatalogHero() {
 					</div>
 
 					{/* Ingredients */}
-					<div className="flex items-center gap-3 mb-10">
+					<div className="flex flex-wrap items-center gap-3 mb-10">
 						<span className="text-xs font-bold uppercase tracking-widest text-black/40">
-							Made with
+							{t("catalog.madeWith")}
 						</span>
 						{active.ingredients.map((ing) => (
 							<span
@@ -150,32 +142,25 @@ export default function ProductCatalogHero() {
 					</div>
 
 					{/* Stats row */}
-					<div className="flex items-center gap-6 mb-10">
+					<div className="flex items-center gap-4 sm:gap-6 mb-10">
 						<div>
-							<p className="text-2xl font-black">{active.cal}</p>
-							<p className="text-xs text-black/40 font-medium">Per bottle</p>
+							<p className="text-xl sm:text-2xl font-black">{active.cal}</p>
+							<p className="text-xs text-black/40 font-medium">{t("catalog.perBottleLabel")}</p>
 						</div>
 						<div className="w-px h-10 bg-black/10" />
 						<div>
-							<p className="text-2xl font-black">{active.sugar}</p>
-							<p className="text-xs text-black/40 font-medium">Sugar</p>
+							<p className="text-xl sm:text-2xl font-black">{active.sugar}</p>
+							<p className="text-xs text-black/40 font-medium">{t("catalog.sugar")}</p>
 						</div>
 						<div className="w-px h-10 bg-black/10" />
 						<div>
-							<p className="text-2xl font-black">350ml</p>
-							<p className="text-xs text-black/40 font-medium">Volume</p>
+							<p className="text-xl sm:text-2xl font-black">350ml</p>
+							<p className="text-xs text-black/40 font-medium">{t("catalog.volume")}</p>
 						</div>
 					</div>
 
 					{/* CTA */}
 					<div className="flex items-center gap-4">
-						{/* <button
-							className="flex-1 max-w-[200px] py-4 rounded-2xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 active:translate-y-0"
-							style={{
-								backgroundColor: active.color,
-								transition: "background-color 0.6s ease",
-							}}
-						> */}
 						<CtaButton
 							message={`Halo Admin, saya ingin memesan ${active.name}. Mohon informasi pricelist dan ketersediaan produknya.`}
 							className={buttonVariants({
@@ -187,18 +172,17 @@ export default function ProductCatalogHero() {
 								transition: "background-color 0.6s ease",
 							}}
 						>
-							Add to Cart
+							{t("catalog.addToCart")}
 						</CtaButton>
-						{/* </button> */}
 						<div className="text-right">
 							<p className="text-3xl font-black">{active.price}</p>
-							<p className="text-xs text-black/40">per bottle</p>
+							<p className="text-xs text-black/40">{t("catalog.perBottle")}</p>
 						</div>
 					</div>
 				</div>
 
 				{/* Right: Bottle visual */}
-				<div className="flex-1 flex flex-col items-center justify-center max-w-md relative">
+				<div className="flex-1 flex flex-col items-center justify-center max-w-md relative w-full">
 					{/* Glow behind bottle */}
 					<div
 						className="absolute w-64 h-64 rounded-full blur-3xl opacity-40 transition-all duration-700"
@@ -206,7 +190,7 @@ export default function ProductCatalogHero() {
 					/>
 
 					<div
-						className="relative z-10 flex justify-center items-center w-full max-w-[180px] lg:max-w-[220px] select-none"
+						className="relative z-10 flex justify-center items-center w-full max-w-[160px] sm:max-w-[180px] lg:max-w-[220px] select-none"
 						style={{
 							filter: "drop-shadow(0 40px 60px rgba(0,0,0,0.15))",
 							opacity: isAnimating ? 0 : 1,
@@ -215,11 +199,10 @@ export default function ProductCatalogHero() {
 							animation: "floatBottle 3s ease-in-out infinite",
 						}}
 					>
-						{/* {active.emoji} */}
 						<img
 							src={active.emoji}
 							alt={active.name}
-							className="w-[180px] h-[180px] lg:w-[220px] lg:h-[220px] object-contain drop-shadow-xl"
+							className="w-full h-auto object-contain drop-shadow-xl"
 						/>
 					</div>
 

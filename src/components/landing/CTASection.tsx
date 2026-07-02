@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CTASection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 lg:py-32 gradient-sunset relative overflow-hidden">
       {/* Decorative circles */}
@@ -11,22 +14,22 @@ const CTASection = () => {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="text-center text-primary-foreground">
           <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6">
-            Ready to refresh your day?
+            {t("cta.title")}
           </h2>
           <p className="text-lg lg:text-xl mb-10 opacity-90 max-w-xl mx-auto">
-            Join thousands of happy customers who've made Frush their daily refreshment choice.
+            {t("cta.subtitle")}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="cta" size="xl" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
-              Order Frush Now
+              {t("cta.orderNow")}
             </Button>
             <Button 
               variant="outline" 
               size="xl" 
               className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
             >
-              Find Our Products
+              {t("cta.findProducts")}
             </Button>
           </div>
         </div>

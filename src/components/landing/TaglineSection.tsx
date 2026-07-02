@@ -1,4 +1,8 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const TaglineSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-24 lg:py-40 bg-background relative overflow-hidden">
       {/* Decorative elements */}
@@ -13,7 +17,7 @@ const TaglineSection = () => {
             <span className="text-gradient">Frush.</span>
           </h2>
           <p className="text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto">
-            Experience the perfect blend of nature's finest fruits in every refreshing sip.
+            {t("tagline.description")}
           </p>
         </div>
       </div>

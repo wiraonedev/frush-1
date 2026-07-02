@@ -1,6 +1,9 @@
 import variant1 from "@/assets/images/real/4.webp";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const FreshnessShowcase = () => {
+	const { t } = useLanguage();
+
 	return (
 		<section className="py-20 lg:py-32 bg-frush-yellow-light relative overflow-hidden">
 			{/* Decorative elements */}
@@ -21,34 +24,32 @@ const FreshnessShowcase = () => {
 					{/* Content */}
 					<div className="text-center lg:text-left">
 						<h2 className="text-3xl lg:text-5xl font-bold mb-6">
-							Real fruits.{" "}
-							<span className="text-gradient">Real freshness.</span>
+							{t("freshness.title")}{" "}
+							<span className="text-gradient">{t("freshness.titleHighlight")}</span>
 						</h2>
 						<p className="text-lg text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0">
-							No exaggeration. Every Frush drink is made with carefully selected
-							fresh fruits, ensuring you get the authentic taste and natural
-							goodness in every bottle.
+							{t("freshness.description")}
 						</p>
 
 						<div className="grid grid-cols-2 gap-6 max-w-md mx-auto lg:mx-0">
 							<div className="bg-card rounded-2xl p-4 text-center shadow-sm">
 								<p className="text-2xl font-bold text-accent">100%</p>
-								<p className="text-sm text-muted-foreground">Real Fruit</p>
+								<p className="text-sm text-muted-foreground">{t("freshness.realFruit")}</p>
 							</div>
 							<div className="bg-card rounded-2xl p-4 text-center shadow-sm">
 								<p className="text-2xl font-bold text-primary">0</p>
 								<p className="text-sm text-muted-foreground">
-									Artificial Colors
+									{t("freshness.artificialColors")}
 								</p>
 							</div>
 							<div className="bg-card rounded-2xl p-4 text-center shadow-sm">
-								<p className="text-2xl font-bold text-secondary">Low</p>
-								<p className="text-sm text-muted-foreground">Sugar Content</p>
+								<p className="text-2xl font-bold text-secondary">{t("freshness.low")}</p>
+								<p className="text-sm text-muted-foreground">{t("freshness.sugarContent")}</p>
 							</div>
 							<div className="bg-card rounded-2xl p-4 text-center shadow-sm">
-								<p className="text-2xl font-bold text-accent">Fresh</p>
+								<p className="text-2xl font-bold text-accent">{t("freshness.fresh")}</p>
 								<p className="text-sm text-muted-foreground">
-									Daily Production
+									{t("freshness.dailyProduction")}
 								</p>
 							</div>
 						</div>

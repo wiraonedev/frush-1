@@ -1,12 +1,29 @@
 import { Instagram, Facebook, Twitter, Youtube } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    Products: ["Infused Drinks", "Fruit Tea", "Chilled Drinks", "New Arrivals"],
-    Company: ["About Us", "Our Story", "Sustainability", "Careers"],
-    Support: ["Contact Us", "FAQs", "Store Locator", "Delivery Info"],
+    [t("footer.products")]: [
+      t("footer.infusedDrinks"),
+      t("footer.fruitTea"),
+      t("footer.chilledDrinks"),
+      t("footer.newArrivals"),
+    ],
+    [t("footer.company")]: [
+      t("footer.aboutUs"),
+      t("footer.ourStory"),
+      t("footer.sustainability"),
+      t("footer.careers"),
+    ],
+    [t("footer.support")]: [
+      t("footer.contactUs"),
+      t("footer.faqs"),
+      t("footer.storeLocator"),
+      t("footer.deliveryInfo"),
+    ],
   };
 
   const socialLinks = [
@@ -24,8 +41,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-bold text-gradient mb-4">Frush</h3>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Fresh, light, and natural fruit drinks designed for your modern lifestyle. 
-              Experience the refreshing taste of real fruits.
+              {t("footer.description")}
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -65,14 +81,14 @@ const Footer = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Frush. All rights reserved.
+              © {currentYear} Frush. {t("footer.rights")}
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Privacy Policy
+                {t("footer.privacy")}
               </a>
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Terms of Service
+                {t("footer.terms")}
               </a>
             </div>
           </div>

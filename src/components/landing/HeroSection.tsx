@@ -1,8 +1,11 @@
 import heroBottle from "@/assets/images/real/2.webp";
 import WhatsAppButton from "@/components/ui/cta-button";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
+	const { t } = useLanguage();
+
 	return (
 		<section
 			id="home"
@@ -13,15 +16,15 @@ const HeroSection = () => {
 					{/* Text Content */}
 					<div className="text-center lg:text-left order-2 lg:order-1">
 						<h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 animate-fade-in">
-							Fresh in <span className="text-gradient">Every Rush.</span>
+							{t("hero.tagline")}{" "}
+							<span className="text-gradient">{t("hero.taglineHighlight")}</span>
 						</h1>
 
 						<p
 							className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0 animate-fade-in"
 							style={{ animationDelay: "0.2s" }}
 						>
-							A fresh, light, and natural fruit drink designed for your modern
-							lifestyle.
+							{t("hero.description")}
 						</p>
 
 						<div
@@ -29,7 +32,7 @@ const HeroSection = () => {
 							style={{ animationDelay: "0.4s" }}
 						>
 							<Button variant="hero" size="lg">
-								Explore Our Drinks
+								{t("hero.explore")}
 							</Button>
 							<WhatsAppButton
 								className={buttonVariants({
@@ -37,7 +40,7 @@ const HeroSection = () => {
 									size: "lg",
 								})}
 							>
-								Order Now
+								{t("hero.orderNow")}
 							</WhatsAppButton>
 						</div>
 
@@ -48,15 +51,15 @@ const HeroSection = () => {
 						>
 							<div className="text-center">
 								<p className="text-3xl font-bold text-primary">100%</p>
-								<p className="text-sm text-muted-foreground">Natural</p>
+								<p className="text-sm text-muted-foreground">{t("hero.natural")}</p>
 							</div>
 							<div className="text-center">
 								<p className="text-3xl font-bold text-secondary">2+</p>
-								<p className="text-sm text-muted-foreground">Flavors</p>
+								<p className="text-sm text-muted-foreground">{t("hero.flavors")}</p>
 							</div>
 							<div className="text-center">
 								<p className="text-3xl font-bold text-accent">10+</p>
-								<p className="text-sm text-muted-foreground">Happy Customers</p>
+								<p className="text-sm text-muted-foreground">{t("hero.happyCustomers")}</p>
 							</div>
 						</div>
 					</div>

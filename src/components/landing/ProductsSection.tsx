@@ -1,33 +1,37 @@
 import product1 from "@/assets/images/real/1.webp";
 import product2 from "@/assets/images/real/2.webp";
 import product3 from "@/assets/images/real/3.webp";
-
-const products = [
-	{
-		name: "Green Tea",
-		description: "Real Green Tea blended with natural fruit essences",
-		flavors: ["Strawberry Semangka Lemon"],
-		color: "bg-frush-yellow",
-	},
-	{
-		name: "Coconut Water",
-		description: "Real Coconut Water blended with natural fruit essences",
-		flavors: ["Strawberry Semangka Lemon"],
-		color: "bg-frush-red",
-	},
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProductsSection = () => {
+	const { t } = useLanguage();
+
+	const products = [
+		{
+			name: "Green Tea",
+			descKey: "products.greenTeaDesc",
+			flavors: ["Strawberry Semangka Lemon"],
+			color: "bg-frush-yellow",
+		},
+		{
+			name: "Coconut Water",
+			descKey: "products.coconutWaterDesc",
+			flavors: ["Strawberry Semangka Lemon"],
+			color: "bg-frush-red",
+		},
+	];
+
 	return (
 		<section id="products" className="py-20 lg:py-32 bg-background">
 			<div className="container mx-auto px-4 lg:px-8">
 				<div className="text-center mb-16">
 					<h2 className="text-3xl lg:text-5xl font-bold mb-4">
-						Our <span className="text-gradient">Refreshing</span> Choices
+						{t("products.title")}{" "}
+						<span className="text-gradient">{t("products.titleHighlight")}</span>{" "}
+						{t("products.titleEnd")}
 					</h2>
 					<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-						Discover our range of delicious fruit drinks, each crafted with care
-						and packed with natural goodness.
+						{t("products.subtitle")}
 					</p>
 				</div>
 
@@ -72,12 +76,12 @@ const ProductsSection = () => {
 								{product.name}
 							</h3>
 							<p className="text-muted-foreground mb-6">
-								{product.description}
+								{t(product.descKey)}
 							</p>
 
 							<div className="space-y-2">
 								<p className="text-sm font-semibold text-foreground">
-									Popular Flavors:
+									{t("products.popularFlavors")}
 								</p>
 								<div className="flex flex-wrap gap-2">
 									{product.flavors.map((flavor) => (
