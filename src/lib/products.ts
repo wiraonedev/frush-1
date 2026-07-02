@@ -1,40 +1,38 @@
-import product1 from "@/assets/images/real/1.webp";
-import product2 from "@/assets/images/real/2.webp";
-// import product3 from "@/assets/images/real/3.webp";
-// import product4 from "@/assets/images/real/4.webp";
-// import product5 from "@/assets/images/real/5.webp";
-// import product6 from "@/assets/images/real/6.webp";
+import bottleGlass from "@/assets/images/new/botol_kaca.png";
+import bottlePlastic from "@/assets/images/new/botol_plastik.png";
 
 export const products = [
 	{
 		id: 1,
-		name: "FRUSH Green Tea",
-		tagline: "Sunshine in a bottle",
-		category: "Green Tea",
-		price: "Rp 20.000",
-		color: "#F5A623",
-		gradient: "from-[#F5A623] to-[#F7C948]",
-		bgLight: "#FFF8E7",
-		emoji: product1,
-		ingredients: ["Semangka", "Lemon", "Strawberry"],
-		badges: ["Best Seller", "100% Natural"],
-		cal: "36 kcal",
-		sugar: "8g",
-	},
-	{
-		id: 2,
-		name: "FRUSH Coconut Water",
-		tagline: "Coconut Frenzy in a bottle",
+		name: "FRUSH Botol Kaca",
+		tagline: "Refreshing coconut meets tropical fruits",
 		category: "Coconut Water",
-		price: "Rp 20.000",
+		price: "Rp20.000",
 		color: "#E8445A",
 		gradient: "from-[#E8445A] to-[#FF7B8E]",
 		bgLight: "#FFF0F2",
-		emoji: product2,
-		ingredients: ["Strawberry", "Semangka", "Lemon"],
-		badges: ["New", "Low Sugar"],
-		cal: "48 kcal",
-		sugar: "6g",
+		emoji: bottleGlass,
+		ingredients: ["Air Kelapa", "Strawberry", "Lemon", "Semangka"],
+		badges: ["Best Seller", "No Basil Seeds"],
+		cal: "52 kcal",
+		sugar: "9g",
+		volume: "350ml",
+	},
+	{
+		id: 2,
+		name: "FRUSH Botol Plastik",
+		tagline: "Coconut goodness with a citrus twist",
+		category: "Coconut Water",
+		price: "Rp15.000",
+		color: "#4CAF50",
+		gradient: "from-[#4CAF50] to-[#8BC34A]",
+		bgLight: "#F0F8F0",
+		emoji: bottlePlastic,
+		ingredients: ["Air Kelapa", "Bulir Jeruk", "Strawberry", "Biji Selasih"],
+		badges: ["Affordable", "With Basil Seeds"],
+		cal: "38 kcal",
+		sugar: "7g",
+		volume: "250ml",
 	},
 	// {
 	// 	id: 3,

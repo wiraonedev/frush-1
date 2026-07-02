@@ -82,12 +82,12 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "products.popularFlavors": { en: "Popular Flavors:", id: "Rasa Populer:" },
   "products.greenTeaDesc": {
-    en: "Real Green Tea blended with natural fruit essences",
-    id: "Teh Hijau Asli yang dicampur dengan sari buah alami",
+    en: "Real Coconut Water blended with Strawberry, Lemon & Watermelon — fresh and clean, no basil seeds",
+    id: "Air Kelapa Asli dipadukan Strawberry, Lemon & Semangka — segar dan bersih, tanpa biji selasih",
   },
   "products.coconutWaterDesc": {
-    en: "Real Coconut Water blended with natural fruit essences",
-    id: "Air Kelapa Asli yang dicampur dengan sari buah alami",
+    en: "Real Coconut Water with Orange Granules, Strawberry & Basil Seeds — refreshing with a chewy twist",
+    id: "Air Kelapa Asli dengan Bulir Jeruk, Strawberry & Biji Selasih — segar dengan tekstur yang unik",
   },
 
   // Freshness Showcase
@@ -224,7 +224,8 @@ const translations: Record<string, Record<Language, string>> = {
   "catalog.perBottle": { en: "per bottle", id: "per botol" },
   "catalog.order": { en: "Order", id: "Pesan" },
   "catalog.madeWith": { en: "Made with", id: "Dibuat dengan" },
-  "catalog.addToCart": { en: "Add to Cart", id: "Tambah ke Keranjang" },
+  "catalog.addToCart": { en: "Order via WhatsApp", id: "Pesan via WhatsApp" },
+  "catalog.orderWA": { en: "Order via WA", id: "Pesan via WA" },
   "catalog.perBottleLabel": { en: "Per bottle", id: "Per botol" },
   "catalog.realFruit": { en: "Real Fruit", id: "Buah Asli" },
   "catalog.noConcentrates": { en: "No concentrates", id: "Tanpa konsentrat" },
@@ -239,13 +240,22 @@ const translations: Record<string, Record<Language, string>> = {
   "catalog.perServing": { en: "Per serving", id: "Per sajian" },
 
   // Product names & taglines
+  "product.bottleGlassTagline": {
+    en: "Refreshing coconut meets tropical fruits",
+    id: "Kelapa menyegarkan bertemu buah-buah tropis",
+  },
+  "product.bottlePlasticTagline": {
+    en: "Coconut goodness with a citrus twist",
+    id: "Kelapa lezat dengan sentuhan jeruk dan selasih",
+  },
+  // Legacy keys kept for compatibility
   "product.greenTeaTagline": {
-    en: "Sunshine in a bottle",
-    id: "Cahaya matahari dalam botol",
+    en: "Refreshing coconut meets tropical fruits",
+    id: "Kelapa menyegarkan bertemu buah-buah tropis",
   },
   "product.coconutWaterTagline": {
-    en: "Coconut Frenzy in a bottle",
-    id: "Kesegaran kelapa dalam botol",
+    en: "Coconut goodness with a citrus twist",
+    id: "Kelapa lezat dengan sentuhan jeruk dan selasih",
   },
   "product.primary": { en: "Primary", id: "Utama" },
   "product.secondary": { en: "Secondary", id: "Sekunder" },

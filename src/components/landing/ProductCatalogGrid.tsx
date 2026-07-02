@@ -28,13 +28,13 @@ function ProductCard({
 }) {
 	const { ref, inView } = useInView();
 	const [hovered, setHovered] = useState(false);
-	const [added, setAdded] = useState(false);
 	const { t } = useLanguage();
 
-	const handleAdd = () => {
-		setAdded(true);
-		setTimeout(() => setAdded(false), 1800);
-	};
+	const phoneNumber = "6288987135615";
+	const waMessage = encodeURIComponent(
+		`Halo Admin, saya ingin memesan *${product.name}* (${product.volume}). Mohon informasi ketersediaan dan cara pemesanannya. Terima kasih!`
+	);
+	const waLink = `https://wa.me/${phoneNumber}?text=${waMessage}`;
 
 	return (
 		<div
@@ -154,7 +154,7 @@ function ProductCard({
 							<p className="text-[10px] text-black/40 font-medium">{t("catalog.sugar")}</p>
 						</div>
 						<div className="flex-1 bg-white/50 rounded-xl py-2">
-							<p className="text-sm font-black">350ml</p>
+							<p className="text-sm font-black">{product.volume}</p>
 							<p className="text-[10px] text-black/40 font-medium">{t("catalog.volume")}</p>
 						</div>
 					</div>
@@ -165,16 +165,18 @@ function ProductCard({
 							<p className="text-xl font-black">{product.price}</p>
 							<p className="text-[10px] text-black/40">{t("catalog.perBottle")}</p>
 						</div>
-						<button
-							onClick={handleAdd}
-							className="px-4 py-2.5 rounded-xl text-white text-sm font-bold transition-all hover:scale-105 active:scale-95 min-w-[110px]"
+						<a
+							href={waLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="px-4 py-2.5 rounded-xl text-white text-sm font-bold transition-all hover:scale-105 active:scale-95 min-w-[110px] text-center"
 							style={{
-								backgroundColor: added ? "#4CAF50" : product.color,
-								transition: "background-color 0.3s ease, transform 0.15s ease",
+								backgroundColor: product.color,
+								transition: "transform 0.15s ease",
 							}}
 						>
-							{added ? `✓ ${t("catalog.addToCart")}` : t("catalog.addToCart")}
-						</button>
+							💬 {t("catalog.orderWA")}
+						</a>
 					</div>
 				</div>
 			</div>
@@ -190,7 +192,7 @@ export default function ProductCatalogGrid() {
 	const { ref: headerRef, inView: headerInView } = useInView(0.1);
 	const { t, language } = useLanguage();
 
-	const categories = [CATEGORY_ALL, "Green Tea", "Coconut Water"];
+	const categories = [CATEGORY_ALL, "Coconut Water"];
 
 	const getCategoryLabel = (cat: string) => {
 		if (cat === CATEGORY_ALL) return language === "id" ? "Semua" : "All";

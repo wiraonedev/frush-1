@@ -30,8 +30,8 @@ export default function ProductCatalogHero() {
 
 	// Tagline translation helper
 	const getTagline = (id: number) => {
-		if (id === 1) return t("product.greenTeaTagline");
-		if (id === 2) return t("product.coconutWaterTagline");
+		if (id === 1) return t("product.bottleGlassTagline");
+		if (id === 2) return t("product.bottlePlasticTagline");
 		return active.tagline;
 	};
 
@@ -154,7 +154,7 @@ export default function ProductCatalogHero() {
 						</div>
 						<div className="w-px h-10 bg-black/10" />
 						<div>
-							<p className="text-xl sm:text-2xl font-black">350ml</p>
+							<p className="text-xl sm:text-2xl font-black">{active.volume}</p>
 							<p className="text-xs text-black/40 font-medium">{t("catalog.volume")}</p>
 						</div>
 					</div>
@@ -162,7 +162,7 @@ export default function ProductCatalogHero() {
 					{/* CTA */}
 					<div className="flex items-center gap-4">
 						<CtaButton
-							message={`Halo Admin, saya ingin memesan ${active.name}. Mohon informasi pricelist dan ketersediaan produknya.`}
+							message={`Halo Admin, saya ingin memesan *${active.name}* (${active.volume}). Mohon informasi ketersediaan dan cara pemesanannya. Terima kasih!`}
 							className={buttonVariants({
 								variant: "default",
 								size: "lg",
@@ -172,7 +172,7 @@ export default function ProductCatalogHero() {
 								transition: "background-color 0.6s ease",
 							}}
 						>
-							{t("catalog.addToCart")}
+							💬 {t("catalog.orderWA")}
 						</CtaButton>
 						<div className="text-right">
 							<p className="text-3xl font-black">{active.price}</p>

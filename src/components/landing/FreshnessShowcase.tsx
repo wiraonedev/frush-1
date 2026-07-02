@@ -1,4 +1,5 @@
-import variant1 from "@/assets/images/real/4.webp";
+import bottleGlass from "@/assets/images/new/botol_kaca.png";
+import bottlePlastic from "@/assets/images/new/botol_plastik.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FreshnessShowcase = () => {
@@ -12,13 +13,24 @@ const FreshnessShowcase = () => {
 
 			<div className="container mx-auto px-4 lg:px-8 relative z-10">
 				<div className="grid lg:grid-cols-2 gap-12 items-center">
-					{/* Image */}
-					<div className="flex justify-center">
-						<img
-							src={variant1}
-							alt="Fresh fruits composition - oranges, strawberries, lemons, and mint"
-							className="w-full max-w-lg animate-float-slow"
-						/>
+					{/* Images: both bottles */}
+					<div className="flex justify-center items-end gap-4 sm:gap-8">
+						<div className="flex flex-col items-center">
+							<img
+								src={bottleGlass}
+								alt="FRUSH Botol Kaca 350ml"
+								className="w-36 sm:w-44 lg:w-52 animate-float-slow object-contain fruit-shadow"
+							/>
+							<p className="mt-2 text-xs font-bold text-muted-foreground">Kaca · 350ml</p>
+						</div>
+						<div className="flex flex-col items-center">
+							<img
+								src={bottlePlastic}
+								alt="FRUSH Botol Plastik 250ml"
+								className="w-28 sm:w-36 lg:w-40 animate-float object-contain fruit-shadow"
+							/>
+							<p className="mt-2 text-xs font-bold text-muted-foreground">Plastik · 250ml</p>
+						</div>
 					</div>
 
 					{/* Content */}

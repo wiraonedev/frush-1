@@ -1,6 +1,5 @@
-import product1 from "@/assets/images/real/1.webp";
-import product2 from "@/assets/images/real/2.webp";
-import product3 from "@/assets/images/real/3.webp";
+import bottleGlass from "@/assets/images/new/botol_kaca.png";
+import bottlePlastic from "@/assets/images/new/botol_plastik.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProductsSection = () => {
@@ -8,16 +7,18 @@ const ProductsSection = () => {
 
 	const products = [
 		{
-			name: "Green Tea",
+			name: "FRUSH Botol Kaca",
 			descKey: "products.greenTeaDesc",
-			flavors: ["Strawberry Semangka Lemon"],
-			color: "bg-frush-yellow",
+			flavors: ["Strawberry", "Lemon", "Semangka"],
+			color: "bg-frush-red",
+			image: bottleGlass,
 		},
 		{
-			name: "Coconut Water",
+			name: "FRUSH Botol Plastik",
 			descKey: "products.coconutWaterDesc",
-			flavors: ["Strawberry Semangka Lemon"],
-			color: "bg-frush-red",
+			flavors: ["Bulir Jeruk", "Strawberry", "Biji Selasih"],
+			color: "bg-frush-yellow",
+			image: bottlePlastic,
 		},
 	];
 
@@ -36,28 +37,16 @@ const ProductsSection = () => {
 				</div>
 
 				{/* Product Image */}
-				<div className="flex flex-row">
-					<div className="flex justify-center mb-16">
-						<img
-							src={product1}
-							alt="Frush product lineup - three colorful fruit drink bottles"
-							className="w-full max-w-2xl fruit-shadow"
-						/>
-					</div>
-					<div className="flex justify-center mb-16">
-						<img
-							src={product2}
-							alt="Frush product lineup - three colorful fruit drink bottles"
-							className="w-full max-w-2xl fruit-shadow"
-						/>
-					</div>
-					<div className="flex justify-center mb-16">
-						<img
-							src={product3}
-							alt="Frush product lineup - three colorful fruit drink bottles"
-							className="w-full max-w-2xl fruit-shadow"
-						/>
-					</div>
+				<div className="flex flex-row justify-center gap-8 mb-16">
+					{products.map((product) => (
+						<div key={product.name} className="flex justify-center">
+							<img
+								src={product.image}
+								alt={`${product.name} - botol minuman Frush`}
+								className="w-full max-w-xs fruit-shadow"
+							/>
+						</div>
+					))}
 				</div>
 
 				{/* Product Cards */}

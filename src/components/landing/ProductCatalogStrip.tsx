@@ -240,7 +240,7 @@ export default function ProductCatalogStrip() {
 							{[
 								{ labelKey: "catalog.calories", value: active.cal },
 								{ labelKey: "catalog.sugar", value: active.sugar },
-								{ labelKey: "catalog.volume", value: "350ml" },
+								{ labelKey: "catalog.volume", value: active.volume },
 							].map(({ labelKey, value }) => (
 								<div
 									key={labelKey}
@@ -261,15 +261,18 @@ export default function ProductCatalogStrip() {
 								<p className="text-3xl font-black text-white">{active.price}</p>
 								<p className="text-xs text-white/30">{t("catalog.perBottle")}</p>
 							</div>
-							<button
-								className="flex-1 py-4 rounded-2xl font-bold text-black text-lg transition-all hover:scale-105 active:scale-95 hover:shadow-2xl"
+							<a
+								href={`https://wa.me/6288987135615?text=${encodeURIComponent(`Halo Admin, saya ingin memesan *${active.name}* (${active.volume}). Mohon informasi ketersediaan dan cara pemesanannya. Terima kasih!`)}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex-1 py-4 rounded-2xl font-bold text-black text-lg transition-all hover:scale-105 active:scale-95 hover:shadow-2xl text-center"
 								style={{
 									background: `linear-gradient(135deg, ${active.color}, ${active.color}bb)`,
 									boxShadow: `0 8px 30px ${active.color}44`,
 								}}
 							>
-								{t("catalog.order")} {active.name}
-							</button>
+								💬 {t("catalog.orderWA")} {active.name}
+							</a>
 						</div>
 					</div>
 				</div>
